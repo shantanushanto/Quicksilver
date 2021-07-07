@@ -87,8 +87,8 @@ int main(int argc, char** argv)
 
    auto t_end = std::chrono::high_resolution_clock::now();
    double elapsed_time_ms = std::chrono::duration<double, std::milli>(t_end-t_start).count();
-   std::cerr << "'JobFinishedSuccessfully'" << std::endl;
-
+   std::cerr << "ElapsedTime: " << elapsed_time_ms << std::endl;
+   std::cerr << "JobFinishedSuccessfully" << std::endl;
    return 0;
 }
 
