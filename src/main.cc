@@ -26,6 +26,8 @@
 #include "git_hash.hh"
 #include "git_vers.hh"
 
+#include <chrono>
+
 void gameOver();
 void cycleInit( bool loadBalance );
 void cycleTracking(MonteCarlo* monteCarlo);
@@ -37,6 +39,8 @@ MonteCarlo *mcco  = NULL;
 
 int main(int argc, char** argv)
 {
+   auto t_start = std::chrono::high_resolution_clock::now();  // track time
+
    mpiInit(&argc, &argv);
    printBanner(GIT_VERS, GIT_HASH);
 
@@ -80,7 +84,11 @@ int main(int argc, char** argv)
 #endif
 
    mpiFinalize();
-   
+
+   auto t_end = std::chrono::high_resolution_clock::now();
+   double elapsed_time_ms = std::chrono::duration<double, std::milli>(t_end-t_start).count();
+   std::cerr << "'JobFinishedSuccessfully'" << std::endl;
+
    return 0;
 }
 
